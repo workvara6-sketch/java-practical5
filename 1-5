@@ -1,0 +1,165 @@
+1. Packages and Access Protection
+File: college/Student.java
+
+java
+package college;
+
+public class Student {
+    public int studentId;
+    public String studentName;
+    public String department;
+
+    public Student(int id, String name, String dept) {
+        this.studentId = id;
+        this.studentName = name;
+        this.department = dept;
+    }
+
+    public void display() {
+        System.out.println("Student ID: " + studentId);
+        System.out.println("Student Name: " + studentName);
+        System.out.println("Department: " + department);
+    }
+}
+File: Main.java
+
+java
+import college.Student;
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student(102, "Ravi", "IT");
+        s.display();
+    }
+}
+Output:
+
+Code
+Student ID: 102
+Student Name: Ravi
+Department: IT
+2. Interface Implementation for Payment System
+java
+interface Payment {
+    void pay();
+}
+
+class CreditCard implements Payment {
+    public void pay() {
+        System.out.println("Payment done using Credit Card");
+    }
+}
+
+class UPI implements Payment {
+    public void pay() {
+        System.out.println("Payment done using UPI");
+    }
+}
+
+public class PaymentDemo {
+    public static void main(String[] args) {
+        Payment p1 = new CreditCard();
+        p1.pay();
+
+        Payment p2 = new UPI();
+        p2.pay();
+    }
+}
+Output:
+
+Code
+Payment done using Credit Card
+Payment done using UPI
+3. Division by Zero Exception Handling
+java
+import java.util.Scanner;
+
+public class DivisionDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter numerator: ");
+        int num = sc.nextInt();
+        System.out.print("Enter denominator: ");
+        int den = sc.nextInt();
+
+        try {
+            int result = num / den;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception occurred: Arithmetic Exception");
+        } finally {
+            System.out.println("Program execution completed");
+        }
+    }
+}
+Input:
+
+Code
+Enter numerator: 10
+Enter denominator: 0
+Output:
+
+Code
+Exception occurred: Arithmetic Exception
+Program execution completed
+4. Multiple Catch Blocks
+java
+public class MultipleCatchDemo {
+    public static void main(String[] args) {
+        try {
+            int arr[] = new int[5];
+            arr[10] = 50; // ArrayIndexOutOfBoundsException
+            int result = 10 / 0; // ArithmeticException
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index error handled");
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic error handled");
+        }
+
+        System.out.println("Program continues execution");
+    }
+}
+Output:
+
+Code
+Array index error handled
+Program continues execution
+5. Throw and Throws with User-Defined Exception
+java
+import java.util.Scanner;
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class VotingSystem {
+    public static void checkAge(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Not eligible for voting");
+        } else {
+            System.out.println("Eligible for voting");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter age: ");
+        int age = sc.nextInt();
+
+        try {
+            checkAge(age);
+        } catch (InvalidAgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+Input:
+
+Code
+Enter age: 16
+Output:
+
+Code
+Exception: Not eligible for voting
